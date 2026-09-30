@@ -1,5 +1,4 @@
-
-name: Deploy React Portfolio
+name: Deploy Portfolio
 on:
   push:
     branches: ["main"]
@@ -11,20 +10,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
+      - uses: actions/checkout@v4
+      - uses: actions/upload-pages-artifact@v3
         with:
-          node-version: 22
-      - name: Install deps
-        working-directory: ./portfolio
-        run: npm install --legacy-peer-deps
-      - name: Build
-        working-directory: ./portfolio
-        run: npm run build
-      - name: Upload
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./portfolio/dist
+          path: ./
   deploy:
     needs: build
     runs-on: ubuntu-latest
